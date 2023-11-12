@@ -1,40 +1,44 @@
-{
-    "products": [
-        {
-            "name": "Classic Spam",
-            "price": 3.99,
-            "description": "The original and classic Spam flavor, perfect for sandwiches and fry-ups.",
-            "qty_available": 100
-        },
-        {
-            "name": "Spam Lite",
-            "price": 4.29,
-            "description": "A lighter version of the classic Spam with 50% less fat.",
-            "qty_available": 80
-        },
-        {
-            "name": "Spam with Bacon",
-            "price": 4.59,
-            "description": "Spam combined with the rich flavor of bacon.",
-            "qty_available": 60
-        },
-        {
-            "name": "Spam Garlic",
-            "price": 4.49,
-            "description": "Garlic-infused Spam for an extra kick.",
-            "qty_available": 70
-        },
-        {
-            "name": "Spam Hot & Spicy",
-            "price": 4.69,
-            "description": "Spam with a spicy twist for those who like it hot.",
-            "qty_available": 50
-        },
-        {
-            "name": "Spam Teriyaki",
-            "price": 4.79,
-            "description": "A unique blend of Spam with Teriyaki flavor.",
-            "qty_available": 40
-        }
-    ]
-}
+[
+    {
+        "name": "Spam 25% Less Sodium",
+        "price": "3.99",
+        "description": "A healthier option with 25% less sodium than the classic spam.",
+        "image": "https://www.spam.com/wp-content/uploads/2019/09/image-product_spam-less-sodium-12oz-420x420.png",
+        "qty_available": 20
+    },
+    {
+        "name": "Spam Classic",
+        "price": "3.50",
+        "description": "The classic spam flavor that everyone loves.",
+        "image": "https://www.spam.com/wp-content/uploads/2019/09/image-product_spam-classic-12oz-420x420.png",
+        "qty_available": 10
+    },
+    {
+        "name": "Spam Hickory Smoke",
+        "price": "4.25",
+        "description": "A rich, smoky flavor for a unique taste experience.",
+        "image": "https://www.spam.com/wp-content/uploads/2019/09/image-product_spam-hickory-smoke-12oz-420x420.png",
+        "qty_available": 15
+    },
+    {
+        "name": "Spam Hot and Spicy",
+        "price": "4.50",
+        "description": "Spicy and flavorful, perfect for those who love a little heat.",
+        "image": "https://www.spam.com/wp-content/uploads/2019/08/image-product_spam-hot-and-spicy-12oz-420x420.png",
+        "qty_available": 25
+    },
+    {
+        "name": "Spam Lite",
+        "price": "3.75",
+        "description": "A lighter version with fewer calories and less fat.",
+        "image": "https://www.spam.com/wp-content/uploads/2019/09/image-product_spam-lite-12oz-420x420.png",
+        "qty_available": 30
+    },
+    {
+        "name": "Spam Teriyaki",
+        "price": "4.75",
+        "description": "A delicious teriyaki twist on the classic spam.",
+        "image": "https://www.spam.com/wp-content/uploads/2019/09/image-product_spam-teriyaki-12oz-420x420.png",
+        "qty_available": 10
+    }
+]
