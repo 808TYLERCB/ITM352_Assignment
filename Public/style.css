@@ -1,0 +1,55 @@
+.header-container {
+    text-align: center;
+    padding-top: 10%;
+}
+.header-container h1 {
+font-size: 4rem;
+font-weight: bold;
+}
+
+.logo {
+    height: 50px; /* Adjust as needed */
+}
+
+/* Hover effect for navigation links */
+.navbar-light .navbar-nav .nav-link:hover {
+color: #010101; /* Lighter shade or different color */
+text-decoration: underline;
+}
+
+/* Custom button styling */
+.btn-primary {
+background-color: #007bff; /* Primary color */
+border-color: #007bff;
+transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+background-color: #0056b3; /* Darker shade for hover */
+border-color: #0056b3;
+}
+
+/* Footer styles */
+.footer {
+background-color: #f8f9fa;
+color: #000000;
+text-align: center;
+padding: 20px 0;
+position: absolute;
+bottom: 0;
+width: 100%;
+}
+
+/* Custom styles for the navbar purchase button */
+.navbar .form-inline button {
+    text-align: center;
+    background-color: black; /* Make the button black */
+    color: white; /* Change text color to white for better visibility */
+    width: 1350px; /* Set a specific width */
+    border: none; /* Optional: remove the border */
+}
+
+/* Additional styling for hover effect */
+.navbar .form-inline button:hover {
+    background-color: #333; /* Slightly lighter black on hover */
+}

@@ -4,21 +4,43 @@
     <title>Product Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="index.html">
+            <img src="/public/images/logo.png" alt="Logo" class="logo">
+            Spam Mart LLC
+        </a>
+        <div class="collapse navbar-collapse justify-content-center">
+            <form action="/purchase" method="POST" class="form-inline">
+                <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+            
+        </div>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="products_display.html">Products</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+ 
     <div class="container mt-4">
-        <form action="./purchase" method="POST">
-            <div id="products-container">
-                <!-- Products will be displayed here by the JavaScript code -->
-            </div>
-            <input type="submit" value="Purchase" class="btn btn-primary mt-3">
-        </form>
+        <div class="container mt-4">
+            <!-- Container where products will be displayed -->
+            <div id="products-container"></div>
+        </div>
     </div>
+    </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="products.js"></script>
+    <script type="text/javascript" src="./products.js"></script>
     
 </body>
+
 </html>
