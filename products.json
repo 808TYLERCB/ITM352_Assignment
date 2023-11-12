@@ -1,0 +1,40 @@
+{
+    "products": [
+        {
+            "name": "Classic Spam",
+            "price": 3.99,
+            "description": "The original and classic Spam flavor, perfect for sandwiches and fry-ups.",
+            "qty_available": 100
+        },
+        {
+            "name": "Spam Lite",
+            "price": 4.29,
+            "description": "A lighter version of the classic Spam with 50% less fat.",
+            "qty_available": 80
+        },
+        {
+            "name": "Spam with Bacon",
+            "price": 4.59,
+            "description": "Spam combined with the rich flavor of bacon.",
+            "qty_available": 60
+        },
+        {
+            "name": "Spam Garlic",
+            "price": 4.49,
+            "description": "Garlic-infused Spam for an extra kick.",
+            "qty_available": 70
+        },
+        {
+            "name": "Spam Hot & Spicy",
+            "price": 4.69,
+            "description": "Spam with a spicy twist for those who like it hot.",
+            "qty_available": 50
+        },
+        {
+            "name": "Spam Teriyaki",
+            "price": 4.79,
+            "description": "A unique blend of Spam with Teriyaki flavor.",
+            "qty_available": 40
+        }
+    ]
+}
