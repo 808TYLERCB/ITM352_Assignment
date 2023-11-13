@@ -1,110 +1,108 @@
-// Importing the Express.js framework
 const express = require('express');
-
-// Create an instance of the Express application called "app"
 const app = express();
 
-// Middleware to log all requests
-app.use((request, response, next) => {
-    console.log(`${request.method} to ${request.path}`);
-    next();
-});
-
-// Middleware to parse URL-encoded bodies (as sent by HTML forms)
+// Middleware for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// Import data from a JSON file containing information about products
+// Your other middleware and route handlers
+app.all('*', function (request, response, next) {
+   console.log(request.method + ' to ' + request.path);
+   next();
+});
+
+// Import product data
 const products = require(__dirname + "/products.json");
-
-// Define a route for handling a GET request to "/products.js"
-app.get('/products.js', (request, response) => {
-    response.type('js');
-    const productsStr = `let products = ${JSON.stringify(products)};`;
-    response.send(productsStr);
+// Initialize quantity sold for each product
+products.forEach(product => {
+    product.qty_sold = 0;
 });
 
-app.post('/purchase', (req, res) => {
-    const purchaseData = req.body; // Assuming this is an object with product IDs and quantities
-
-    // Validate purchase data
-    let isValidPurchase = true;
-    let errorMessage = '';
-    let totalQuantity = 0;
-
-    for (let productId in purchaseData) {
-        const quantity = parseInt(purchaseData[productId], 10);
-
-        if (isNaN(quantity) || quantity < 0) {
-            isValidPurchase = false;
-            errorMessage = 'Invalid quantity entered.';
-            break;
-        }
-
-        if (quantity > products[productId].qty_available) {
-            isValidPurchase = false;
-            errorMessage = 'Quantity exceeds available stock.';
-            break;
-        }
-
-        if (quantity === 0) {
-            continue; // Skip if quantity is 0, but keep checking other items
-        }
-
-        totalQuantity += quantity;
-    }
-
-    if (totalQuantity === 0) {
-        isValidPurchase = false;
-        errorMessage = 'No quantities selected.';
-    }
-
-    if (!isValidPurchase) {
-        // Redirect back to products page with an error message
-        return res.redirect('/products_display.html?error=' + encodeURIComponent(errorMessage));
-    }
-
-    // Update inventory and calculate total
-    let total = 0;
-    for (let productId in purchaseData) {
-        const quantity = purchaseData[productId];
-        products[productId].qty_available -= quantity;
-        total += products[productId].price * quantity;
-    }
-
-    // Calculate tax at 4%
-    const tax = total * 0.04;
-
-    // Calculate shipping based on total quantity
-    const shipping = calculateShipping(totalQuantity);
-
-    const grandTotal = total + tax + shipping;
-
-    // Generate invoice
-    res.send(`Invoice: Total - $${total.toFixed(2)}, Tax - $${tax.toFixed(2)}, Shipping - $${shipping.toFixed(2)}, Grand Total - $${grandTotal.toFixed(2)}`);
+// Serve product data
+app.get('/products.js', function(request, response) {
+    response.type('.js');
+    const products_str = `let products = ${JSON.stringify(products)};`;
+    response.send(products_str);
 });
 
-// Function to calculate shipping based on total quantity
-function calculateShipping(totalQuantity) {
-    let shippingCost = 0;
-    if (totalQuantity <= 5) {
-        shippingCost = 5; // Flat rate for small quantities
-    } else if (totalQuantity <= 10) {
-        shippingCost = 10; // Higher rate for medium quantities
+// Process purchase
+app.post('/process-purchase', (req, res) => {
+    let validationErrors = quantityValidation(req.body, products);
+    
+    if (validationErrors.length > 0) {
+        // Redirect with error messages
+        res.redirect('/products_display.html?errors=' + encodeURIComponent(JSON.stringify(validationErrors)));
     } else {
-        shippingCost = 15; // Maximum rate for large quantities
+        // Create an array to hold the invoice items
+        const invoiceItems = products.map(product => {
+            const quantityKey = `quantity_${product.name.replace(/\s+/g, '_')}`;
+            const quantity = parseInt(req.body[quantityKey], 10);
+            if (quantity > 0) {
+                // Update available quantity
+                product.qty_available -= quantity;
+                // Update quantity sold
+                product.qty_sold += quantity;
+
+                // Return the item for the invoice
+                return {
+                    name: product.name,
+                    quantity: quantity,
+                    price: product.price,
+                    extendedPrice: quantity * product.price
+                };
+            }
+            return null;
+        }).filter(item => item != null); // Remove null entries where quantity was not greater than 0
+
+        // Encode the invoice items array as a JSON string
+        const invoiceQueryString = encodeURIComponent(JSON.stringify(invoiceItems));
+        // Redirect to the invoice page with the invoice data as a query parameter
+        res.redirect(`/invoice.html?invoiceData=${invoiceQueryString}`);
     }
-    return shippingCost;
+});
+
+function quantityValidation(reqBody, products) {
+    let errors = [];
+    let totalQuantitySelected = 0;
+
+    // Check each product for selected quantity and validate
+    products.forEach(product => {
+        const quantityKey = `quantity_${product.name.replace(/\s+/g, '_')}`;
+        let quantityStr = reqBody[quantityKey];
+
+        // Check if the quantity is defined and not empty
+        if (quantityStr !== undefined && quantityStr.trim() !== '') {
+            let quantity = parseInt(quantityStr, 10);
+
+            // Check if the parsed number is an integer and not NaN
+            if (!isNaN(quantity) && quantity.toString() === quantityStr.trim()) {
+                totalQuantitySelected += quantity;
+
+                if (quantity < 0) {
+                    errors.push(`Negative quantity for ${product.name} is not allowed.`);
+                } else if (quantity > product.qty_available) {
+                    errors.push(`Insufficient quantity available for ${product.name}. Only ${product.qty_available} left.`);
+                }
+            } else {
+                // If the quantity is not an integer or is NaN
+                errors.push(`Invalid quantity for ${product.name}. Please enter a positive whole number.`);
+            }
+        }
+    });
+
+    // Check for total quantity selected
+    if (totalQuantitySelected === 0 && errors.length === 0) {
+        // If no valid quantities have been entered and no other errors have been collected
+        errors.push('No quantities were selected. Please select at least one product.');
+    }
+
+    return errors;
 }
 
 
-// Serve static files from a directory named "public"
+
+
+// Serve static files from 'public' directory
 app.use(express.static(__dirname + '/public'));
 
-// Start the server; listen on port 8080 for incoming HTTP requests
-app.listen(8080, () => console.log('Listening on port 8080'));
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+// Start the server
+app.listen(8080, () => console.log(`listening on port 8080`));

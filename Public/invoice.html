@@ -2,14 +2,23 @@
 <html>
 <head>
     <title>Invoice</title>
+
+    <script type="text/javascript" src="./products.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 
+<style> 
+
+body {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/images/banner.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
+</style>
+
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">Invoice</h2>
         <div class="row">
             <div class="col-12">
                 <table class="table table-bordered">
@@ -17,27 +26,31 @@
                         <tr>
                             <th>Product Name</th>
                             <th>Quantity</th>
-                            <th>Price Per Item</th>
-                            <th>Total</th>
+                            <th>Price</th>
+                            <th>Extended Price</th>
                         </tr>
                     </thead>
                     <tbody id="invoice-body">
                         <!-- Invoice items will be inserted here -->
                     </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-right">
-                <h4>Total Amount: <span id="total-amount">$0.00</span></h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-center">
-                <button onclick="window.print();" class="btn btn-primary">Print Invoice</button>
-            </div>
-        </div>
-    </div>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Subtotal:</td>
+                            <td id="subtotal-amount">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Sales Tax (4%):</td>
+                            <td id="tax-amount">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Shipping:</td>
+                            <td id="shipping-amount">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Total Amount:</strong></td>
+                            <td id="total-amount">$0.00</td>
+                        </tr>
+                    </tfoot>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

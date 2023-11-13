@@ -43,7 +43,7 @@ width: 100%;
 /* Custom styles for the navbar purchase button */
 .navbar .form-inline button {
     text-align: center;
-    background-color: black; /* Make the button black */
+    background-color: rgb(16, 16, 110); /* Make the button black */
     color: white; /* Change text color to white for better visibility */
     width: 1350px; /* Set a specific width */
     border: none; /* Optional: remove the border */
