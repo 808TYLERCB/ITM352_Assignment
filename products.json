@@ -1,8 +1,8 @@
 [
   {
-    "name": "Spam 25% Less Sodium",
+    "name": "Spam Less Sodium",
     "price": 3.99,
-    "description": "A healthier option with 25% less sodium than the classic spam.",
+    "description": "A healthier option with less sodium than the classic spam.",
     "image": "https://www.spam.com/wp-content/uploads/2019/09/image-product_spam-less-sodium-12oz-420x420.png",
     "qty_available": 200
   },

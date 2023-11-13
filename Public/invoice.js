@@ -1,13 +1,3 @@
-function safeDecodeURIComponent(encoded) {
-    try {
-        return decodeURIComponent(encoded);
-    } catch (error) {
-        console.error('Error decoding:', error);
-        return null;
-    }
-}
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const invoiceDataEncoded = urlParams.get('invoiceData');
@@ -36,7 +26,10 @@ function populateInvoice(invoiceItems) {
         // Create a new row and cells with the item data
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${item.name}</td>
+            <td>
+                <img src="${item.icon}" alt="${item.name}" class="product-icon" data-toggle="tooltip" data-placement="top" title="${item.description}">
+                ${item.name}
+            </td>
             <td>${item.quantity}</td>
             <td>$${item.price.toFixed(2)}</td>
             <td>$${item.extendedPrice.toFixed(2)}</td>
@@ -47,6 +40,11 @@ function populateInvoice(invoiceItems) {
         // Update subtotal and total quantity
         subtotal += item.extendedPrice;
         totalQuantity += item.quantity;
+    });
+
+    // Initialize Bootstrap tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
     // Calculate sales tax and shipping

@@ -3,6 +3,7 @@
     padding-top: 10%;
 }
 .header-container h1 {
+color: hsl(0, 0%, 100%);
 font-size: 4rem;
 font-weight: bold;
 }
@@ -31,8 +32,9 @@ border-color: #0056b3;
 
 /* Footer styles */
 .footer {
-background-color: #f8f9fa;
-color: #000000;
+background: linear-gradient(to right, #0062E6, #33AEFF); /* Custom gradient */
+box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Subtle shadow for depth */
+color: #ffffff;
 text-align: center;
 padding: 20px 0;
 position: absolute;
@@ -40,16 +42,40 @@ bottom: 0;
 width: 100%;
 }
 
-/* Custom styles for the navbar purchase button */
-.navbar .form-inline button {
-    text-align: center;
-    background-color: rgb(16, 16, 110); /* Make the button black */
-    color: white; /* Change text color to white for better visibility */
-    width: 1350px; /* Set a specific width */
-    border: none; /* Optional: remove the border */
+.navbar-custom {
+    background: linear-gradient(to right, #0062E6, #33AEFF); /* Custom gradient */
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Subtle shadow for depth */
 }
 
-/* Additional styling for hover effect */
-.navbar .form-inline button:hover {
-    background-color: #333; /* Slightly lighter black on hover */
+.navbar-custom .navbar-brand {
+    color: white;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #a1cbef; /* Lighter shade for hover */
+}
+
+.logo {
+    height: 50px; /* Adjust as needed */
+}
+
+.table {
+    background-color: rgba(255, 255, 255, 0.95); /* Adjust the opacity as desired */
+}
+
+.table th,
+.table td {
+    background-color: rgba(255, 255, 255, 1); /* Solid color for cells */
+}
+
+.product-icon {
+    width: 30px; /* or any size that fits your design */
+    height: auto;
+    margin-right: 5px;
+    cursor: pointer;
 }

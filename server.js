@@ -4,7 +4,7 @@ const app = express();
 // Middleware for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// Your other middleware and route handlers
+// middleware and route handlers
 app.all('*', function (request, response, next) {
    console.log(request.method + ' to ' + request.path);
    next();
@@ -47,7 +47,9 @@ app.post('/process-purchase', (req, res) => {
                     name: product.name,
                     quantity: quantity,
                     price: product.price,
-                    extendedPrice: quantity * product.price
+                    extendedPrice: quantity * product.price,
+                    icon: product.image, // Use the image URL from the product JSON
+                    description: product.description // Use the description from the product JSON
                 };
             }
             return null;
@@ -97,9 +99,6 @@ function quantityValidation(reqBody, products) {
 
     return errors;
 }
-
-
-
 
 // Serve static files from 'public' directory
 app.use(express.static(__dirname + '/public'));
