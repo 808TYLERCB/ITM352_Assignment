@@ -1,3 +1,4 @@
+// fetching URL from the server
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const invoiceDataEncoded = urlParams.get('invoiceData');
@@ -9,10 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
         populateInvoice(invoiceData);
     } else {
         console.error('No invoice data available.');
-        // Handle the lack of data appropriately, maybe show an error message
+        // show an error message, if error in fetching data
     }
 });
 
+// Function that populates the invoice from the decoded URL
 function populateInvoice(invoiceItems) {
     const invoiceBody = document.getElementById('invoice-body');
     let subtotal = 0;

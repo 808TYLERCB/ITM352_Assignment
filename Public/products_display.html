@@ -3,6 +3,7 @@
 <head>
     <title>Product Page</title>
 
+     <!-- Loading Product Data-->
     <script type="text/javascript" src="./products.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -11,6 +12,7 @@
     
 </head>
 
+<!-- Background -->
 <style> body {
     background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/images/background.jpeg') no-repeat center center fixed;
     background-size: cover;
@@ -19,7 +21,7 @@
 </style>
 
 <body>
-
+<!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand" href="index.html">
             <img src="/images/logo.png" alt="Logo" class="logo">
@@ -35,9 +37,11 @@
         </div>
     </nav>
 
+    <!-- Pruchase Form -->
     <div class="container mt-4">
         <form action="/process-purchase" method="POST">
             <div id="products-container"></div>
+            <!-- Product Cards Dynamically populate here -->
             <div class="row justify-content-center mt-4 mb-5">
                 <div class="col-md-8">
                     <button type="submit" class="btn btn-primary btn-block">Confirm Purchase</button>
@@ -49,6 +53,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="./products_display.js"></script>
+    <script src="./products_display.js"></script> <!-- Script to handle product display data -->
 </body>
 </html>
